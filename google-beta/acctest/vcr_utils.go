@@ -223,6 +223,13 @@ func isReleaseDiffEnabled() bool {
 	return releaseDiff != ""
 }
 
+// github action to checkout + make
+// release_diff flag
+// running the entire test suite
+// error message format - FLAG (field) (testname)
+// grep FLAG for each (or parse)
+// return
+
 func initializeReleaseDiffTest(c resource.TestCase, testName string) resource.TestCase {
 	var releaseProvider string
 	packagePath := fmt.Sprint(reflect.TypeOf(transport_tpg.Config{}).PkgPath())
