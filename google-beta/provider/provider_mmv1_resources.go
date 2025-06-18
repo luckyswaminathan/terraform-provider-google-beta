@@ -60,6 +60,7 @@ import (
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/services/colab"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/services/composer"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/services/compute"
+	"github.com/hashicorp/terraform-provider-google-beta/google-beta/services/contactcenterinsights"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/services/containeranalysis"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/services/containerattached"
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/services/corebilling"
@@ -296,6 +297,7 @@ var handwrittenDatasources = map[string]*schema.Resource{
 	"google_container_engine_versions":                           container.DataSourceGoogleContainerEngineVersions(),
 	"google_container_registry_image":                            containeranalysis.DataSourceGoogleContainerImage(),
 	"google_container_registry_repository":                       containeranalysis.DataSourceGoogleContainerRepo(),
+	"google_dataplex_data_quality_rules":                         dataplex.DataSourceDataplexDataQualityRules(),
 	"google_dataproc_metastore_service":                          dataprocmetastore.DataSourceDataprocMetastoreService(),
 	"google_datastream_static_ips":                               datastream.DataSourceGoogleDatastreamStaticIps(),
 	"google_dns_keys":                                            dns.DataSourceDNSKeys(),
@@ -962,7 +964,7 @@ var generatedResources = map[string]*schema.Resource{
 	"google_compute_url_map":                                                     compute.ResourceComputeUrlMap(),
 	"google_compute_vpn_gateway":                                                 compute.ResourceComputeVpnGateway(),
 	"google_compute_vpn_tunnel":                                                  compute.ResourceComputeVpnTunnel(),
-	"google_compute_wire_group":                                                  compute.ResourceComputeWireGroup(),
+	"google_contact_center_insights_view":                                        contactcenterinsights.ResourceContactCenterInsightsView(),
 	"google_container_analysis_note":                                             containeranalysis.ResourceContainerAnalysisNote(),
 	"google_container_analysis_note_iam_binding":                                 tpgiamresource.ResourceIamBinding(containeranalysis.ContainerAnalysisNoteIamSchema, containeranalysis.ContainerAnalysisNoteIamUpdaterProducer, containeranalysis.ContainerAnalysisNoteIdParseFunc),
 	"google_container_analysis_note_iam_member":                                  tpgiamresource.ResourceIamMember(containeranalysis.ContainerAnalysisNoteIamSchema, containeranalysis.ContainerAnalysisNoteIamUpdaterProducer, containeranalysis.ContainerAnalysisNoteIdParseFunc),
@@ -1819,6 +1821,7 @@ func UseGeneratedProducts() {
 	var _ = colab.ProductName
 	var _ = composer.ProductName
 	var _ = compute.ProductName
+	var _ = contactcenterinsights.ProductName
 	var _ = containeranalysis.ProductName
 	var _ = containerattached.ProductName
 	var _ = corebilling.ProductName
