@@ -3,8 +3,22 @@
 ## outline of what this script does
 
 ## 1. set the release_diff env var to have a non nil value
-SERVICE_ACCOUNT_KEY_PATH=../../../../ryanoaksnightly2-4466c5daa7a1.json
-export RELEASE_DIFF=true
+# SERVICE_ACCOUNT_KEY_PATH=../../../../ryanoaksnightly2-4466c5daa7a1.json
+# export RELEASE_DIFF=true
+# export GOOGLE_REGION=us-central1
+# export GOOGLE_ZONE=us-central1-a
+# export ORG_ID=280476229921
+# export GOOGLE_PROJECT=ryanoaksnightly2
+# export GOOGLE_ORG=280476229921
+# export GOOGLE_CUST_ID=C02jqjwhe
+# export GOOGLE_ORG_DOMAIN=ryanoakstestco.joonix.net
+# export GOOGLE_PROJECT_NUMBER=1011002275372
+# export GOOGLE_IDENTITY_USER=ryantest
+# export GOOGLE_BILLING_ACCOUNT=01129A-55361F-811C70
+# # export GCLOUD_KEYFILE_JSON=$SERVICE_ACCOUNT_KEY_PATH
+# export GCLOUD_SERVICE_ACCOUNT_KEY_PATH=$SERVICE_ACCOUNT_KEY_PATH
+# #export GOOGLE_USE_DEFAULT_CREDENTIALS=true
+# export TF_ACC=true
 export GOOGLE_REGION=us-central1
 export GOOGLE_ZONE=us-central1-a
 export ORG_ID=280476229921
@@ -15,9 +29,7 @@ export GOOGLE_ORG_DOMAIN=ryanoakstestco.joonix.net
 export GOOGLE_PROJECT_NUMBER=1011002275372
 export GOOGLE_IDENTITY_USER=ryantest
 export GOOGLE_BILLING_ACCOUNT=01129A-55361F-811C70
-# export GCLOUD_KEYFILE_JSON=$SERVICE_ACCOUNT_KEY_PATH
-export GCLOUD_SERVICE_ACCOUNT_KEY_PATH=$SERVICE_ACCOUNT_KEY_PATH
-#export GOOGLE_USE_DEFAULT_CREDENTIALS=true
+export GOOGLE_USE_DEFAULT_CREDENTIALS=true
 export TF_ACC=true
 ## 2. github actions to get to correct provider(irrelevant for now)
 
@@ -25,8 +37,10 @@ export TF_ACC=true
 
 declare -a TEST_COMMANDS
 
+TEST_COMMANDS+=( "make testacc TEST=./google-beta/services/alloydb TESTARGS='-run=TestAccAlloydbCluster_alloydbClusterBasicExample'" )
 TEST_COMMANDS+=( "make testacc TEST=./google-beta/services/bigtable TESTARGS='-run=TestAccBigtableInstance_basic'" )
-#TEST_COMMANDS+=( "make testacc TEST=./google-beta/services/bigquery TESTARGS='-run=TestAccDataSourceGoogleBigqueryDataset_basic'" )
+TEST_COMMANDS+=( "make testacc TEST=./google-beta/services/alloydb TESTARGS='-run=TestAccAlloydbCluster_withMaintenanceWindowsMissingFields'" )
+TEST_COMMANDS+=( "make testacc TEST=./google-beta/services/bigquery TESTARGS='-run=TestAccDataSourceGoogleBigqueryDefaultServiceAccount_basic'" )
 OVERALL_STATUS=0
 
 echo "--- Running Terraform Acceptance Tests (Sequentially) ---"
